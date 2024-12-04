@@ -2,32 +2,25 @@ package com.java.codeFront.controller;
 
 import com.java.codeFront.service.NewsFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class NewsController {
 
     @Autowired
-    private NewsFetcher fetcherAPI;
+    private NewsFetcher newsFetcher;
 
-    @Value("${newsapi.key}")
-    private String apiKey;
+    // Método para obtener noticias basado en un término de búsqueda
+    public String getNewsFromConsole(String searchQuery) {
+        String apiKey = "d2b9b326b1a14b9b86c3fec798bcf106";
+        String url = "https://newsapi.org/v2/everything?q=" + searchQuery + "&apiKey=" + apiKey;
 
-    private final String COMMON_URL = "https://newsapi.org/v2/everything";
-
-    // Endpoint REST para buscar noticias
-    @GetMapping("/news")
-    public String getNewsFromSearching(@RequestParam String query) {
-        String url = COMMON_URL + "?q=" + query.replace(" ", "+") + "&apiKey=" + apiKey;
-        return fetcherAPI.getData(url);
-    }
-
-    // Método reutilizable para obtener noticias (consola o API)
-    public String getNewsFromConsole(String query) {
-        String url = COMMON_URL + query.replace(" ", "+") + "&apiKey=" + apiKey;
-        return fetcherAPI.getData(url);
+        try {
+            // Método para obtener y guardar las noticias
+            newsFetcher.fetchAndSaveNews(url);
+            return "Noticias obtenidas para: " + searchQuery;
+        } catch (Exception e) {
+            return "Error al obtener noticias: " + e.getMessage();
+        }
     }
 }
