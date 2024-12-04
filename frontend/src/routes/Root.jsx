@@ -9,7 +9,6 @@ import "../assets/css/Fonts.css";
 const Root = () => {
     return (
         <div>
-            <Header />
             <div className="main-container">
                 <Sidebar />
                 <div className="content">
