@@ -2,26 +2,55 @@
 .sidebar {
     height: 100vh;
     width: 180px;
-    background-color: var(--azul);
     padding-top: 20px;
     display: flex;
     flex-direction: column;
+    background-color: black;
+}
+
+.nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.nav-logo img.Logo {
+    max-width: 100px;
+    height: auto;
 }
 
 .nav-link {
-    color: black;
+    color: white; /* Color de texto blanco por defecto */
     display: flex;
     align-items: center;
     font-weight: bold;
     font-size: 1.2rem;
     padding: 30px 30px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición para el color del texto */
+}
+.nav-link {
+    color: white; /* Color de texto blanco por defecto */
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 30px 30px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición para el color del texto */
 }
 
 .nav-link img.icon {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    filter: invert(100%); /* Asegura que los íconos SVG sean blancos */
+}
+
+.nav-link:hover {
+    background-color: #333; /* Fondo gris al pasar el mouse */
+    color: var(--azul); /* Color blanco claro para las letras al pasar el mouse */
 }
 
 .nav-link:focus {

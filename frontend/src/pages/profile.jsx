@@ -13,15 +13,15 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
-            <h1 className="profile-title">Mi Perfil</h1>
+            <h1 className="profile-title">My Profile</h1>
             <div className="profile-info">
-                {/*<p><strong>Nombre de usuario:</strong> {session ? session.username : "Usuario no disponible"}</p>*/}
-                {/* Temporariamente mostramos un texto fijo para el nombre de usuario */}
-                <p className="profile-subtitle"><strong>Usuario:</strong></p>
+                {/*<p><strong>Username:</strong> {session ? session.username : "Username not available"}</p>*/}
+                {/* Temporarily displaying a fixed username */}
+                <p className="profile-subtitle"><strong>Username:</strong></p>
                 <p className="profile-text">Pamela2001</p>
             </div>
             <div className="logout-button-container">
-                <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
+                <button className="logout-button" onClick={handleLogout}>Log Out</button>
             </div>
         </div>
     );
