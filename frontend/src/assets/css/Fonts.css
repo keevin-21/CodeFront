@@ -1,0 +1,23 @@
+:root {
+    --marca-font: 'Codec Bold', arial, serif;
+    --texto-font: 'Monserrat Regular', arial, serif;
+    --titulo-font: 'Codec Pro Italic', arial, serif;
+}
+/* MARCA */
+@font-face {
+    font-display: swap;
+    font-family: 'Codec Bold';
+    src: url('../fonts/Codec-Cold-Bold-trial.ttf') format('woff2');
+}
+/* TEXT */
+@font-face {
+    font-display: swap;
+    font-family: 'Monserrat Regular';
+    src: url('../fonts/Montserrat-Regular.ttf') format('woff2');
+}
+/* TITLE */
+@font-face {
+    font-display: swap;
+    font-family: 'Codec Pro Italic';
+    src: url('../fonts/SourceCodePro-Italic.ttf') format('woff2');
+}

@@ -1,0 +1,53 @@
+.profile-container {
+    padding: 70px 0 0 0;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: var(--texto-font), arial, serif;
+}
+
+.profile-title {
+    font-family: var(--titulo-font), arial, serif;
+    color: var(--verde);
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.profile-text {
+    margin-top: -10px;
+    font-size: 24px;
+}
+
+.profile-subtitle{
+    color: var(--azul);
+    font-size: 1rem !important;
+}
+
+.logout-button-container {
+    margin-top: 20px;
+}
+
+.logout-button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-top: 300px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: #e43d3b;
+}
+
+.logout-button:focus {
+    outline: none; /* Eliminar el borde cuando el botón está enfocado */
+}

@@ -1,0 +1,21 @@
+body {
+    background-color: var(--fondo) !important;
+    color: white !important;
+    font-family: var(--texto-font), arial, serif !important;
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.main-container {
+    display: flex !important;
+    height: 100vh !important;
+}
+
+.content {
+    flex-grow: 1 !important;
+}
