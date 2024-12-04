@@ -15,10 +15,8 @@ import java.util.Date;
 
 @Service
 public class NewsFetcher {
-
     @Autowired
     private NewsService newsService; // Servicio para guardar noticias
-
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void fetchAndSaveNews(String url) {
@@ -26,7 +24,6 @@ public class NewsFetcher {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
-
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String jsonResponse = response.body();
@@ -35,8 +32,6 @@ public class NewsFetcher {
 
             for (JsonNode article : articles) {
                 News news = new News();
-                // Elimina la línea que establece newsID manualmente
-                // news.setNewsID(article.path("url").hashCode()); // No lo pongan
 
                 news.setTitle(article.path("title").asText());
                 news.setShortDescription(article.path("description").asText());
