@@ -1,6 +1,7 @@
 package com.java.codeFront.model;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "Users")
@@ -10,13 +11,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
 
-    @Column(name = "UserName", nullable = false, unique = true)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
 
-    @Column(name = "UserPassword", nullable = false)
+    @NotNull
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
-    @Column(name = "Bookmarks")
+    @Column(name = "bookmarks")
     private String bookmarks;
 
     // Getters y Setters

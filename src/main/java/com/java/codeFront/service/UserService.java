@@ -12,10 +12,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public User registerUser(User user) {
-        // Validar si el usuario ya existe
+        // Verificar si el nombre de usuario ya está en uso
         if (userRepository.existsByUserName(user.getUserName())) {
             throw new RuntimeException("Username already taken.");
         }
-        return userRepository.save(user); // Guardar el usuario
+        // Guardar el usuario en la base de datos
+        return userRepository.save(user);
     }
 }
