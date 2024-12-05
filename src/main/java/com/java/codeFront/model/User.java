@@ -1,36 +1,31 @@
 package com.java.codeFront.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int userID;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "UserName", nullable = false, unique = true)
     private String userName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserBookmark> bookmarks;
+    @Column(name = "UserPassword", nullable = false)
+    private String userPassword;
 
-    // Constructor vacío (requerido por JPA)
-    public User() {}
-
-    // Constructor con parámetros (opcional)
-    public User(String userName) {
-        this.userName = userName;
-    }
+    @Column(name = "Bookmarks")
+    private String bookmarks;
 
     // Getters y Setters
-    public int getUserId() {
-        return userId;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getUserName() {
@@ -41,21 +36,19 @@ public class User {
         this.userName = userName;
     }
 
-    public List<UserBookmark> getBookmarks() {
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getBookmarks() {
         return bookmarks;
     }
 
-    public void setBookmarks(List<UserBookmark> bookmarks) {
+    public void setBookmarks(String bookmarks) {
         this.bookmarks = bookmarks;
-    }
-
-    // toString (opcional)
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", bookmarks=" + bookmarks +
-                '}';
     }
 }
