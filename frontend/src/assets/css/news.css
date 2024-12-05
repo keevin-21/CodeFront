@@ -1,17 +1,17 @@
-.favorites-page {
+.news-page {
     display: flex;
     width: 100%;
     height: 100vh;
     margin-left: 180px;
 }
 
-.favorites-content {
+.news-content {
     width: calc(100% - 180px);
     padding: 20px 0;
     text-align: center;
 }
 
-.favorites-title {
+.news-title {
     font-family: var(--titulo-font), arial, serif;
     color: var(--verde);
     font-size: 3rem;
@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.favorite-cards {
+.news-cards {
     padding: 30px 30px;
 }
 

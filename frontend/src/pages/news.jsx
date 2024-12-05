@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../assets/css/favorites.css";
+import "../assets/css/news.css";
 import { Card, Button, Row, Col, Modal } from "react-bootstrap";
 import ModalArticle from "../components/ModalNew";
 
-const Favorites = () => {
+const News = () => {
     // SIMULATED DATA
     const mockData = [
         {
@@ -66,10 +66,10 @@ const Favorites = () => {
     };
 
     return (
-        <div className="favorites-page">
-            <div className="favorites-content">
-                <h1 className="favorites-title">Favorites</h1>
-                <div className="favorite-cards">
+        <div className="news-page">
+            <div className="news-content">
+                <h1 className="news-title">News</h1>
+                <div className="news-cards">
                     <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
                         {mockData.map((article, index) => (
                             <Col key={index}>
@@ -108,4 +108,4 @@ const Favorites = () => {
     );
 };
 
-export default Favorites;
+export default News;

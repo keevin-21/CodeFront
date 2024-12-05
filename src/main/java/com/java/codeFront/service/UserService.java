@@ -19,4 +19,12 @@ public class UserService {
         // Guardar el usuario en la base de datos
         return userRepository.save(users);
     }
+
+    public boolean validateUser(String userName, String userPassword) {
+        Users user = userRepository.findByUserName(userName);
+        if (user != null && user.getUserPassword().equals(userPassword)) {
+            return true; // Credenciales válidas
+        }
+        return false; // Credenciales inválidas
+    }
 }
