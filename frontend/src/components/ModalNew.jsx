@@ -6,10 +6,32 @@ import "../components/modalNew.css";
 import starIcon from "../assets/icons/star-icon.svg";
 import starFillIcon from "../assets/icons/star-fill-icon.svg";
 
-const ModalNew = ({ show, handleClose, article }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+const ModalNew = ({ show, handleClose, article, handleFavorite }) => {
+    const [isFavorite, setIsFavorite] = useState(article.isFavorite || false); // Inicializa con el estado pasado
+
+    // Función para actualizar el estado de favoritos en localStorage
+    const updateFavoriteStatus = (article, status) => {
+        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (status) {
+            // Agregar al localStorage
+            savedFavorites.push(article);
+        } else {
+            // Eliminar del localStorage
+            const updatedFavorites = savedFavorites.filter((fav) => fav.id !== article.id);
+            localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+            return updatedFavorites;
+        }
+        localStorage.setItem("favorites", JSON.stringify(savedFavorites));
+        return savedFavorites;
+    };
+
     const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);
+        const newFavoriteStatus = !isFavorite;
+        setIsFavorite(newFavoriteStatus);
+        handleFavorite(article, newFavoriteStatus); // Llamada para actualizar el estado global o persistente
+
+        // Actualizar el estado local de favoritos en localStorage
+        updateFavoriteStatus(article, newFavoriteStatus);
     };
 
     return (
