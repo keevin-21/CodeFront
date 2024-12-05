@@ -12,7 +12,7 @@ public class UserBookmark {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    private Users users;
 
     @ManyToOne
     @JoinColumn(name = "newsId", nullable = false)
@@ -33,12 +33,12 @@ public class UserBookmark {
         this.bookmarkId = bookmarkId;
     }
 
-    public User getUser() {
-        return user;
+    public Users getUser() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Users users) {
+        this.users = users;
     }
 
     public News getNews() {
