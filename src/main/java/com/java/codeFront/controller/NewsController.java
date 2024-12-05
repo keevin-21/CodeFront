@@ -1,12 +1,12 @@
 package com.java.codeFront.controller;
 
+import com.java.codeFront.model.News;
 import com.java.codeFront.service.NewsFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -20,6 +20,22 @@ public class NewsController {
     private String apiKey;
 
     private final String COMMON_URL = "https://newsapi.org/v2/everything";
+
+    // Endpoint para obtener noticias de tecnología al inicio
+    @GetMapping("/home")
+    public List<News> getTechNews() {
+        // Construir la URL para obtener noticias de tecnología en inglés
+        String url = COMMON_URL + "?q=technology&language=en&apiKey=" + apiKey;
+
+        try {
+            // Llamar al método para obtener y guardar las noticias
+            List<News> newsList = newsFetcher.fetchAndSaveNews(url);
+            return newsList;  // Devuelve la lista de noticias
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener noticias: " + e.getMessage());
+        }
+    }
+
 
     // Endpoint para obtener y guardar noticias basado en un término de búsqueda
     @PostMapping("/save")
