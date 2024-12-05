@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,7 +35,11 @@ public class UserController {
         try {
             Users loggedInUser = userService.loginUser(users.getUserName(), users.getUserPassword());
             if (loggedInUser != null) {
-                return ResponseEntity.ok(new ResponseMessage("Login successful!"));
+                // Crear un objeto con los datos del usuario
+                Map<String, Object> response = new HashMap<>();
+                response.put("userName", loggedInUser.getUserName());
+                response.put("userId", loggedInUser.getUserID());
+                return ResponseEntity.ok(response); // Enviar los datos al frontend
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseMessage("Invalid username or password."));
@@ -43,6 +49,7 @@ public class UserController {
                     .body(new ResponseMessage("Error: " + e.getMessage()));
         }
     }
+
 
     // Clase interna para estructurar la respuesta
     static class ResponseMessage {

@@ -23,13 +23,16 @@
     font-size: 24px;
 }
 
-.profile-subtitle{
+.profile-subtitle {
     color: var(--azul);
     font-size: 1rem !important;
 }
 
 .logout-button-container {
-    margin-top: 20px;
+    position: fixed; /* Fija el botón en la pantalla */
+    top: 20px;
+    right: 20px; /* Mover a la esquina superior derecha */
+    z-index: 1000; /* Asegura que el botón esté encima de otros elementos */
 }
 
 .logout-button {
@@ -39,7 +42,6 @@
     padding: 12px 25px;
     font-size: 16px;
     border-radius: 10px;
-    margin-top: 300px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -49,5 +51,5 @@
 }
 
 .logout-button:focus {
-    outline: none; /* Eliminar el borde cuando el botón está enfocado */
+    outline: none;
 }
