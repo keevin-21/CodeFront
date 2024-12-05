@@ -31,9 +31,9 @@ public class ConsoleRunner implements CommandLineRunner {
             }
 
             try {
-                String news = newsController.searchNewsFromConsole(query);
+                //String news = newsController.searchNewsFromConsole(query);
                 System.out.println("\nFetched News:");
-                System.out.println(news);
+                //System.out.println(news);
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
             }

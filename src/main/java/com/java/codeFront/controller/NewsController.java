@@ -4,10 +4,11 @@ import com.java.codeFront.model.News;
 import com.java.codeFront.service.NewsFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/news")
@@ -19,44 +20,31 @@ public class NewsController {
     @Value("${newsapi.key}")
     private String apiKey;
 
-    private final String COMMON_URL = "https://newsapi.org/v2/everything";
+    private static final String COMMON_URL = "https://newsapi.org/v2/everything";
 
     // Endpoint para obtener noticias de tecnología al inicio
+// Endpoint para obtener noticias basado en un término de búsqueda
     @GetMapping("/home")
-    public List<News> getTechNews() {
-        // Construir la URL para obtener noticias de tecnología en inglés
-        String url = COMMON_URL + "?q=technology&language=en&apiKey=" + apiKey;
+    public CompletableFuture<ResponseEntity<List<News>>> getNews(@RequestParam(required = false) String searchQuery) {
+        String query = (searchQuery != null && !searchQuery.isEmpty()) ? searchQuery : "technology";
+        String url = COMMON_URL + "?q=" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
+
+        return newsFetcher.fetchAndSaveNewsAsync(url)
+                .thenApply(newsList -> ResponseEntity.ok().body(newsList))
+                .exceptionally(e -> ResponseEntity.status(500).build());
+    }
+
+    @GetMapping("/process")
+    public ResponseEntity<String> processNews(@RequestParam(required = false) String searchQuery) {
+        String query = (searchQuery != null && !searchQuery.isEmpty()) ? searchQuery : "technology";
+        String url = COMMON_URL + "?q=" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
 
         try {
-            // Llamar al método para obtener y guardar las noticias
             List<News> newsList = newsFetcher.fetchAndSaveNews(url);
-            return newsList;  // Devuelve la lista de noticias
+            return ResponseEntity.ok("Noticias procesadas exitosamente para el término: " + query);
         } catch (Exception e) {
-            throw new RuntimeException("Error al obtener noticias: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error al procesar noticias: " + e.getMessage());
         }
     }
 
-
-    // Endpoint para obtener y guardar noticias basado en un término de búsqueda
-    @PostMapping("/save")
-    public String fetchAndSaveNews(@RequestParam String searchQuery) {
-        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
-        try {
-            newsFetcher.fetchAndSaveNews(url);
-            return "Noticias obtenidas y guardadas para el término: " + searchQuery;
-        } catch (Exception e) {
-            return "Error al guardar noticias: " + e.getMessage();
-        }
-    }
-    public String searchNewsFromConsole(@RequestParam String searchQuery) {
-        // Modificamos la URL para buscar solo noticias sobre tecnología y en inglés
-        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
-        try {
-            // Método para obtener y guardar las noticias
-            newsFetcher.fetchAndSaveNews(url);
-            return "Noticias de tecnología en inglés obtenidas para: " + searchQuery;
-        } catch (Exception e) {
-            return "Error al obtener noticias: " + e.getMessage();
-        }
-    }
 }
