@@ -1,12 +1,12 @@
 package com.java.codeFront.controller;
 
+import com.java.codeFront.model.News;
 import com.java.codeFront.service.NewsFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -21,10 +21,26 @@ public class NewsController {
 
     private final String COMMON_URL = "https://newsapi.org/v2/everything";
 
+    // Endpoint para obtener noticias de tecnología al inicio
+    @GetMapping("/home")
+    public List<News> getTechNews() {
+        // Construir la URL para obtener noticias de tecnología en inglés
+        String url = COMMON_URL + "?q=technology&language=en&apiKey=" + apiKey;
+
+        try {
+            // Llamar al método para obtener y guardar las noticias
+            List<News> newsList = newsFetcher.fetchAndSaveNews(url);
+            return newsList;  // Devuelve la lista de noticias
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener noticias: " + e.getMessage());
+        }
+    }
+
+
     // Endpoint para obtener y guardar noticias basado en un término de búsqueda
     @PostMapping("/save")
     public String fetchAndSaveNews(@RequestParam String searchQuery) {
-        String url = COMMON_URL + "?q=" + searchQuery.replace(" ", "+") + "&apiKey=" + apiKey;
+        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
         try {
             newsFetcher.fetchAndSaveNews(url);
             return "Noticias obtenidas y guardadas para el término: " + searchQuery;
@@ -33,11 +49,12 @@ public class NewsController {
         }
     }
     public String searchNewsFromConsole(@RequestParam String searchQuery) {
-        String url = COMMON_URL + "?q=" + searchQuery.replace(" ", "+") + "&apiKey=" + apiKey;
+        // Modificamos la URL para buscar solo noticias sobre tecnología y en inglés
+        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
         try {
             // Método para obtener y guardar las noticias
             newsFetcher.fetchAndSaveNews(url);
-            return "Noticias obtenidas para: " + searchQuery;
+            return "Noticias de tecnología en inglés obtenidas para: " + searchQuery;
         } catch (Exception e) {
             return "Error al obtener noticias: " + e.getMessage();
         }

@@ -1,16 +1,23 @@
-import "../assets/css/login.css";
+import "../assets/css/register.css";
 import React, { useState } from "react";
 
-const Login = () => {
+const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Enviar los datos a la API de login
+        // Validar que las contraseñas coinciden
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        // Enviar los datos a la API
         try {
-            const response = await fetch("http://localhost:8080/api/users/login", {
+            const response = await fetch("http://localhost:8080/api/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -24,9 +31,7 @@ const Login = () => {
             // Verificar la respuesta del servidor
             if (response.ok) {
                 const data = await response.json();
-                alert("Login successful!");
-                // Puedes redirigir al usuario a otra página si es necesario
-                // window.location.href = "/dashboard";
+                alert("User registered successfully!");
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.message}`);
@@ -37,13 +42,13 @@ const Login = () => {
     };
 
     return (
-        <div className="login-page">
-            <div className="login-content">
-                <h1 className="login-title">Welcome to CodeFront</h1>
-                <p className="login-text">Please log in to continue.</p>
-                <form className="login-form" onSubmit={handleSubmit}>
+        <div className="register-page">
+            <div className="register-content">
+                <h1 className="register-title">Create Your Account</h1>
+                <p className="register-text">Please complete the information to register.</p>
+                <form className="register-form" onSubmit={handleSubmit}>
                     <input
-                        className="login-input"
+                        className="register-input"
                         type="text"
                         placeholder="Username"
                         value={username}
@@ -51,23 +56,31 @@ const Login = () => {
                         required
                     />
                     <input
-                        className="login-input"
+                        className="register-input"
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button className="login-button" type="submit">
-                        Log In
+                    <input
+                        className="register-input"
+                        type="password"
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                    <button className="register-button" type="submit">
+                        Sign Up
                     </button>
                 </form>
-                <p className="login-register">
-                    Don't have an account? <a href="/register" className="login-link">Sign up here</a>
+                <p className="register-login">
+                    Already have an account? <a className="register-link" href="/login">Log in here</a>
                 </p>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default Register;

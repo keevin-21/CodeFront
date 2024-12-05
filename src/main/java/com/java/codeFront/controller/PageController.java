@@ -25,4 +25,3 @@ public class PageController {
 		return "favorites"; // Devuelve la plantilla contact.html
 	}
 }
-

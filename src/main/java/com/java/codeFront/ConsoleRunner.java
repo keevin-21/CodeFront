@@ -22,7 +22,7 @@ public class ConsoleRunner implements CommandLineRunner {
         System.out.println("Type 'exit' to quit.");
 
         while (true) {
-            System.out.println("\nEnter a topic to search for news (e.g., 'technology'):");
+            System.out.println("\nEnter a topic to search for news (e.g., 'apple'):");
             String query = scanner.nextLine();
 
             if ("exit".equalsIgnoreCase(query)) {

@@ -23,8 +23,16 @@ public class News {
     private String Source;
     private String Url;
 
-    // Constructor vacío (necesario para JPA)
-    public News() {}
+    @Column(name = "url_to_image")
+    private String urlToImage;
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
 
     // Getters y Setters
     public int getNewsID() {

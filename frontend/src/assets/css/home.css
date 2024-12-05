@@ -1,52 +1,40 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-}
-
-.Home {
-    text-align: center;
-}
-
+/* home.css */
 .home-page {
     display: flex;
-    padding: 0;
-    margin: 0;
     width: 100%;
     height: 100vh;
+    margin-left: 180px;
+}
+
+.home-content {
+    width: calc(100% - 180px);
+    padding: 0;
+    margin: 0;
+}
+
+.home-banner {
+    width: 100%;
+    height: auto;
 }
 
 .home-banner img {
     width: 100%;
     height: auto;
-    display: block;
-}
-
-.home-content {
-    width: 100%;
-    max-width: 2000px;
-    padding: 0;
-    margin: 0;
 }
 
 .home-title {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     font-family: var(--titulo-font), arial, serif;
     color: var(--verde);
-    margin-top: 30px;
     font-size: 3rem;
     font-weight: bold;
+    margin-top: 30px;
 }
 
 .home-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
+    text-align: center;
     font-size: larger;
+    padding: 10px 0;
 }
 
 .home-buttons {
@@ -54,4 +42,5 @@ body, html {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
 }

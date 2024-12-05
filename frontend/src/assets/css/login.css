@@ -1,24 +1,15 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-}
-
+/* login.css */
 .login-page {
     display: flex;
-    justify-content: center;
-    padding: 50px 0 0 0;
     width: 100%;
     height: 100vh;
-    text-align: center;
+    margin-left: 180px;
 }
 
 .login-content {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    width: calc(100% - 180px);
+    padding: 70px 0;
+    text-align: center;
 }
 
 .login-title {
@@ -43,7 +34,8 @@ body, html {
 }
 
 .login-input {
-    width: 100%;
+    width: 400px;
+    max-width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -81,10 +73,4 @@ body, html {
 
 .login-link:hover {
     text-decoration: underline;
-}
-
-.login-error {
-    color: red;
-    margin-top: 10px;
-    font-size: 14px;
 }
