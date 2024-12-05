@@ -25,23 +25,11 @@ const Favorites = () => {
         setSelectedArticle(null);
     };
 
-    // Maneja el cambio de estado de favorito
-    const handleFavorite = (article, isFavorite) => {
-        const updatedFavorites = isFavorite
-            ? [...favorites, article] // Si se marca como favorito, se agrega
-            : favorites.filter((item) => item.id !== article.id); // Si se elimina, se filtra
+    // Elimina un artículo de favoritos
+    const handleRemoveFavorite = (articleToRemove) => {
+        const updatedFavorites = favorites.filter((article) => article.title !== articleToRemove.title);
 
         // Actualiza los favoritos en el estado y en localStorage
-        setFavorites(updatedFavorites);
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    };
-
-    // Elimina un artículo de favoritos
-    const handleRemoveFavorite = (id) => {
-        // Filtra el artículo específico por ID para eliminarlo sin afectar los demás
-        const updatedFavorites = favorites.filter((article) => article.id !== id);
-
-        // Actualiza el estado y guarda los cambios en localStorage
         setFavorites(updatedFavorites);
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     };
@@ -53,7 +41,7 @@ const Favorites = () => {
                 <div className="favorite-cards">
                     {favorites.length > 0 ? (
                         favorites.map((article) => (
-                            <div key={article.id} className="card">
+                            <div key={article.title} className="card">
                                 <img
                                     src={article.urlToImage || "https://via.placeholder.com/150"}
                                     alt={article.title}
@@ -70,7 +58,7 @@ const Favorites = () => {
                                     </button>
                                     <button
                                         className="card-button"
-                                        onClick={() => handleRemoveFavorite(article.id)} // Aseguramos que solo se elimine el artículo con este id
+                                        onClick={() => handleRemoveFavorite(article)} // Pasamos el artículo completo para eliminar
                                     >
                                         Remove from Favorites
                                     </button>
@@ -88,7 +76,6 @@ const Favorites = () => {
                     show={showModal}
                     handleClose={handleCloseModal}
                     article={selectedArticle}
-                    handleFavorite={handleFavorite}
                 />
             )}
         </div>
