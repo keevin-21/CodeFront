@@ -24,7 +24,7 @@ public class NewsController {
     // Endpoint para obtener y guardar noticias basado en un término de búsqueda
     @PostMapping("/save")
     public String fetchAndSaveNews(@RequestParam String searchQuery) {
-        String url = COMMON_URL + "?q=" + searchQuery.replace(" ", "+") + "&apiKey=" + apiKey;
+        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
         try {
             newsFetcher.fetchAndSaveNews(url);
             return "Noticias obtenidas y guardadas para el término: " + searchQuery;
@@ -33,11 +33,12 @@ public class NewsController {
         }
     }
     public String searchNewsFromConsole(@RequestParam String searchQuery) {
-        String url = COMMON_URL + "?q=" + searchQuery.replace(" ", "+") + "&apiKey=" + apiKey;
+        // Modificamos la URL para buscar solo noticias sobre tecnología y en inglés
+        String url = COMMON_URL + "?q=technology+" + searchQuery.replace(" ", "+") + "&language=en&apiKey=" + apiKey;
         try {
             // Método para obtener y guardar las noticias
             newsFetcher.fetchAndSaveNews(url);
-            return "Noticias obtenidas para: " + searchQuery;
+            return "Noticias de tecnología en inglés obtenidas para: " + searchQuery;
         } catch (Exception e) {
             return "Error al obtener noticias: " + e.getMessage();
         }
