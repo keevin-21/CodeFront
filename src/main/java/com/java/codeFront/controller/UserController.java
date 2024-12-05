@@ -1,6 +1,6 @@
 package com.java.codeFront.controller;
 
-import com.java.codeFront.model.User;
+import com.java.codeFront.model.Users;
 import com.java.codeFront.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +15,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody User user) {
+    public ResponseEntity<Object> registerUser(@RequestBody Users users) {
         try {
             // Llamamos al servicio para registrar el usuario
-            userService.registerUser(user);
+            userService.registerUser(users);
             // Devolvemos una respuesta exitosa
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("User registered successfully!"));
         } catch (Exception e) {
