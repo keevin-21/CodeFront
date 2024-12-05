@@ -1,0 +1,25 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.login-page {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-title {
+    display: flex;
+    justify-content: center;
+    font-family: var(--titulo-font), arial, serif;
+    color: var(--verde);
+    margin-top: 30px;
+    font-size: 3rem;
+    font-weight: bold;
+}
