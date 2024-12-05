@@ -14,16 +14,33 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Registro de usuario
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody Users users) {
         try {
-            // Llamamos al servicio para registrar el usuario
-            userService.registerUser(users);
-            // Devolvemos una respuesta exitosa
-            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("User registered successfully!"));
+            userService.registerUser(users);  // Llama al servicio para registrar al usuario
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ResponseMessage("User registered successfully!"));
         } catch (Exception e) {
-            // En caso de error, devolvemos una respuesta con el error y el código de error
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Error registering user: " + e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseMessage("Error registering user: " + e.getMessage()));
+        }
+    }
+
+    // Inicio de sesión de usuario
+    @PostMapping("/login")
+    public ResponseEntity<Object> loginUser(@RequestBody Users users) {
+        try {
+            Users loggedInUser = userService.loginUser(users.getUserName(), users.getUserPassword());
+            if (loggedInUser != null) {
+                return ResponseEntity.ok(new ResponseMessage("Login successful!"));
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseMessage("Invalid username or password."));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseMessage("Error: " + e.getMessage()));
         }
     }
 
