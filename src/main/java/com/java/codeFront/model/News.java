@@ -26,6 +26,17 @@ public class News {
     @Column(name = "url_to_image")
     private String urlToImage;
 
+    @Column(name = "content")
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getUrlToImage() {
         return urlToImage;
     }

@@ -1,9 +1,13 @@
 import "../assets/css/login.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../contexts/SessionContext";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate(); // Declarar navigate
+    const { login } = useSession(); // Extraer login del contexto de sesión
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,9 +26,15 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message); // Muestra un mensaje de éxito
-                // Redirige al usuario a la página principal o dashboard
-                window.location.href = "/news";
+
+                // Guarda la sesión en el contexto
+                login({
+                    token: data.token,
+                    user: data.user, // Información adicional del usuario
+                });
+
+                alert("LOGIN SUCCESSFUL"); // Mensaje de éxito
+                navigate("/news"); // Redirige al dashboard
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.message}`);
@@ -59,7 +69,8 @@ const Login = () => {
                     <button type="submit" className="login-button">Log In</button>
                 </form>
                 <p className="login-register">
-                    Don't have an account? <a href="/register" className="login-link">Sign up here</a>
+                    Don't have an account?{" "}
+                    <a href="/register" className="login-link">Sign up here</a>
                 </p>
             </div>
         </div>

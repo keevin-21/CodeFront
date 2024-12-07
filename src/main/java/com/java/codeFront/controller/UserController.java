@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -30,20 +33,40 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestBody Users users) {
         try {
-            // Validar las credenciales llamando al servicio
-            boolean isValidUser = userService.validateUser(users.getUserName(), users.getUserPassword());
-
-            if (isValidUser) {
-                return ResponseEntity.ok(new ResponseMessage("Login successful!"));
+            Users loggedInUser = userService.loginUser(users.getUserName(), users.getUserPassword());
+            if (loggedInUser != null) {
+                // Crear un objeto con los datos del usuario
+                Map<String, Object> response = new HashMap<>();
+                response.put("userName", loggedInUser.getUserName());
+                response.put("userId", loggedInUser.getUserID());
+                return ResponseEntity.ok(response); // Enviar los datos al frontend
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseMessage("Invalid username or password"));
+                        .body(new ResponseMessage("Invalid username or password."));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseMessage("Error during login: " + e.getMessage()));
+                    .body(new ResponseMessage("Error: " + e.getMessage()));
         }
     }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<Object> loginUser(@RequestBody Users users) {
+//        try {
+//            // Validar las credenciales llamando al servicio
+//            boolean isValidUser = userService.validateUser(users.getUserName(), users.getUserPassword());
+//
+//            if (isValidUser) {
+//                return ResponseEntity.ok(new ResponseMessage("Login successful!"));
+//            } else {
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                        .body(new ResponseMessage("Invalid username or password"));
+//            }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ResponseMessage("Error during login: " + e.getMessage()));
+//        }
+//    }
 
 
     // Clase interna para estructurar la respuesta

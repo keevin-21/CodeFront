@@ -1,7 +1,14 @@
 import "../assets/css/home.css";
 import Banner from "../assets/images/CodeFront-Banner.png";
+import {Navigate} from "react-router-dom";
+import {useSession} from "../contexts/SessionContext";
 
 const Home = () => {
+    const { session } = useSession();
+
+    if (session) {
+        return <Navigate to="/news" replace />;
+    }
     return (
         <div className="home-page">
             <div className="home-content">
@@ -19,7 +26,6 @@ const Home = () => {
                             aria-label="Sign Up">
                         Sign Up
                     </button>
-
                 </div>
             </div>
         </div>

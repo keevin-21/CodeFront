@@ -62,6 +62,7 @@ public class NewsFetcher {
                 news.setSource(article.path("source").path("name").asText());
                 news.setUrl(article.path("url").asText());
                 news.setUrlToImage(article.path("urlToImage").asText());
+                news.setContent(article.path("content").asText());
                 newsList.add(news);
             }
             return newsList;

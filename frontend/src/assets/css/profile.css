@@ -1,4 +1,8 @@
 /* profile.css */
+.logout-button-container {
+    margin-left: 200px;
+}
+
 .profile-page {
     display: flex;
     width: 100%;

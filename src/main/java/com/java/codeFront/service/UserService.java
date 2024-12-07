@@ -20,11 +20,9 @@ public class UserService {
         return userRepository.save(users);
     }
 
-    public boolean validateUser(String userName, String userPassword) {
-        Users user = userRepository.findByUserName(userName);
-        if (user != null && user.getUserPassword().equals(userPassword)) {
-            return true; // Credenciales válidas
-        }
-        return false; // Credenciales inválidas
+    // Método para iniciar sesión
+    public Users loginUser(String userName, String userPassword) {
+        return userRepository.findByUserNameAndUserPassword(userName, userPassword)
+                .orElse(null);
     }
 }
