@@ -41,9 +41,9 @@ public class NewsController {
 
         try {
             List<News> newsList = newsFetcher.fetchAndSaveNews(url);
-            return ResponseEntity.ok("Noticias procesadas exitosamente para el término: " + query);
+            return ResponseEntity.ok("News successfully processed for search: " + query);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error al procesar noticias: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error processing news about: " + e.getMessage());
         }
     }
 
