@@ -16,12 +16,20 @@ public class News {
     @Column(length = 500)
     private String ShortDescription;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date DatePublished;
-
     private String Author;
     private String Source;
     private String Url;
+
+     @Column(name="publishedAt")
+    private String publishedAt;
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
 
     @Column(name = "url_to_image")
     private String urlToImage;
@@ -68,14 +76,6 @@ public class News {
 
     public void setShortDescription(String ShortDescription) {
         this.ShortDescription = ShortDescription;
-    }
-
-    public Date getDatePublished() {
-        return DatePublished;
-    }
-
-    public void setDatePublished(Date DatePublished) {
-        this.DatePublished = DatePublished;
     }
 
     public String getAuthor() {

@@ -24,7 +24,7 @@ const News = () => {
                     description: article.shortDescription,
                     author: article.author,
                     url: article.url,
-                    publishedAt: article.datePublished,
+                    publishedAt: article.publishedAt,
                     content: article.content || "",
                 }));
                 setNews(newsData);
@@ -66,7 +66,7 @@ const News = () => {
                 description: article.shortDescription,
                 author: article.author,
                 url: article.url,
-                publishedAt: article.datePublished,
+                publishedAt: article.publishedAt,
                 content: article.content || "",
             }));
             setNews(newsData); // Actualizar los artículos mostrados

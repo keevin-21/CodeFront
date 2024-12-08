@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://localhost:3000")
 
 public class UserController {
 
@@ -51,26 +50,6 @@ public class UserController {
                     .body(new ResponseMessage("Error: " + e.getMessage()));
         }
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<Object> loginUser(@RequestBody Users users) {
-//        try {
-//            // Validar las credenciales llamando al servicio
-//            boolean isValidUser = userService.validateUser(users.getUserName(), users.getUserPassword());
-//
-//            if (isValidUser) {
-//                return ResponseEntity.ok(new ResponseMessage("Login successful!"));
-//            } else {
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                        .body(new ResponseMessage("Invalid username or password"));
-//            }
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new ResponseMessage("Error during login: " + e.getMessage()));
-//        }
-//    }
-
-
     // Clase interna para estructurar la respuesta
     static class ResponseMessage {
         private String message;

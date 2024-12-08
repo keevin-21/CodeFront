@@ -27,7 +27,7 @@ public class NewsController {
     @GetMapping("/home")
     public CompletableFuture<ResponseEntity<List<News>>> getNews(@RequestParam(required = false) String searchQuery) {
         String query = (searchQuery != null && !searchQuery.isEmpty()) ? searchQuery : "technology";
-        String url = COMMON_URL + "?q=" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
+        String url = COMMON_URL + "?q=technology+" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
 
         return newsFetcher.fetchAndSaveNewsAsync(url)
                 .thenApply(newsList -> ResponseEntity.ok().body(newsList))
@@ -37,7 +37,7 @@ public class NewsController {
     @GetMapping("/process")
     public ResponseEntity<String> processNews(@RequestParam(required = false) String searchQuery) {
         String query = (searchQuery != null && !searchQuery.isEmpty()) ? searchQuery : "technology";
-        String url = COMMON_URL + "?q=" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
+        String url = COMMON_URL + "?q=technology" + query.replace(" ", "+") + "&language=en&sortBy=relevancy&apiKey=" + apiKey;
 
         try {
             List<News> newsList = newsFetcher.fetchAndSaveNews(url);

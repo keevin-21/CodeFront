@@ -44,7 +44,7 @@ const Profile = () => {
     return (
         <div className="profile-page">
             <div className="profile-content">
-                <h1 className="profile-title">Welcome, {session.user_name}!</h1>
+                <h1 className="profile-title">Welcome, {session.userName}!</h1>
                 <div className="profile-info">
                     <p className="profile-subtitle">
                         <strong>To CodeFront: A Tech News Web.</strong>

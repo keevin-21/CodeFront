@@ -57,12 +57,12 @@ public class NewsFetcher {
                 News news = new News();
                 news.setTitle(article.path("title").asText());
                 news.setShortDescription(article.path("description").asText());
-                news.setDatePublished(new Date());
                 news.setAuthor(article.path("author").asText());
                 news.setSource(article.path("source").path("name").asText());
                 news.setUrl(article.path("url").asText());
                 news.setUrlToImage(article.path("urlToImage").asText());
                 news.setContent(article.path("content").asText());
+                news.setPublishedAt(article.path("publishedAt").asText());
                 newsList.add(news);
             }
             return newsList;

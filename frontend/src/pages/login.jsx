@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate(); // Declarar navigate
     const { login } = useSession(); // Extraer login del contexto de sesión
+    const [errorMessage, setErrorMessage] = useState(""); // Para manejar mensajes de error
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,18 +30,18 @@ const Login = () => {
 
                 // Guarda la sesión en el contexto
                 login({
-                    token: data.token,
-                    user: data.user, // Información adicional del usuario
+                    userName: data.userName, // Información del usuario
+                    userId: data.userId,     // ID del usuario
                 });
 
                 alert("LOGIN SUCCESSFUL"); // Mensaje de éxito
-                navigate("/news"); // Redirige al dashboard
+                navigate("/profile"); // Redirige al perfil
             } else {
                 const errorData = await response.json();
-                alert(`Error: ${errorData.message}`);
+                setErrorMessage(errorData.message || "Login failed.");
             }
         } catch (error) {
-            alert(`An error occurred: ${error.message}`);
+            setErrorMessage("An error occurred: ${error.message}");
         }
     };
 
@@ -68,6 +69,7 @@ const Login = () => {
                     />
                     <button type="submit" className="login-button">Log In</button>
                 </form>
+                {errorMessage && <p className="login-error">{errorMessage}</p>}
                 <p className="login-register">
                     Don't have an account?{" "}
                     <a href="/register" className="login-link">Sign up here</a>
