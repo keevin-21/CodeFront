@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../components/modalNew.css";
+import { useSession } from "../contexts/SessionContext";
 
 // Rutas de los íconos
 import starIcon from "../assets/icons/star-icon.svg";
@@ -8,9 +9,53 @@ import starFillIcon from "../assets/icons/star-fill-icon.svg";
 
 const ModalNew = ({ show, handleClose, article }) => {
     const [isFavorite, setIsFavorite] = useState(false);
-    const toggleFavorite = () => {
+    const { currentUser } = useSession();
+
+    const toggleFavorite = async () => {
+        // Verifica si currentUser existe
+        if (!currentUser || !currentUser.userId) {  // Cambia userID por userId
+            console.error("User not logged in or userId is undefined.");
+            alert("You need to log in to add favorites.");
+            return;
+        }
+
         setIsFavorite(!isFavorite);
+
+        try {
+            const response = await fetch('http://localhost:8080/favorites/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: currentUser.userId,  // Usa userId en minúsculas
+                    title: article.title,
+                    shortDescription: article.shortDescription,
+                    author: article.author,
+                    source: article.source,
+                    url: article.url,
+                    urlToImage: article.urlToImage,
+                    publishedAt: article.publishedAt,
+                    content: article.content,
+                }),
+            });
+
+            if (response.ok) {
+                console.log('Favorite added!');
+            } else {
+                const error = await response.text();
+                console.error('Error:', error);
+            }
+        } catch (error) {
+            console.error('Error adding favorite:', error);
+        }
     };
+
+
+    // Si currentUser no está disponible, mostrar mensaje o redirigir
+    if (!currentUser) {
+        return <div>Please log in to manage favorites.</div>;
+    }
 
     return (
         <Modal show={show} onHide={handleClose} className="custom-modal">

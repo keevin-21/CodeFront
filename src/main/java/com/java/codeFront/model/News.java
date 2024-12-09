@@ -1,24 +1,26 @@
 package com.java.codeFront.model;
 
 import jakarta.persistence.*;
-import java.util.Date;
 
 @Entity
+@Table(name="News")
 public class News {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int NewsID;
+    @Column(name = "NewsID")
+    private int newsID;
 
     @Column(nullable = false)
     private String Title;
 
-    @Column(length = 500)
+    @Column(name="short_description")
     private String ShortDescription;
 
     private String Author;
     private String Source;
-    private String Url;
+    @Column(name = "Url", nullable = false, unique = true)
+    private String url;
 
      @Column(name="publishedAt")
     private String publishedAt;
@@ -55,11 +57,11 @@ public class News {
 
     // Getters y Setters
     public int getNewsID() {
-        return NewsID;
+        return newsID;
     }
 
     public void setNewsID(int NewsID) {
-        this.NewsID = NewsID;
+        this.newsID = NewsID;
     }
 
     public String getTitle() {
@@ -95,17 +97,17 @@ public class News {
     }
 
     public String getUrl() {
-        return Url;
+        return url;
     }
 
-    public void setUrl(String Url) {
-        this.Url = Url;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
     public String toString() {
         return "News{" +
-                "NewsID=" + NewsID +
+                "NewsID=" + newsID +
                 ", Title='" + Title + '\'' +
                 '}';
     }

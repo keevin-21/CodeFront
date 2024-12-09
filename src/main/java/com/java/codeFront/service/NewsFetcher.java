@@ -45,11 +45,11 @@ public class NewsFetcher {
 
             for (JsonNode article : articles) {
                 String title = article.path("title").asText();
-                String description = article.path("description").asText();
+                String short_description = article.path("description").asText();
                 String content = article.path("content").asText();
                 String author = article.path("author").asText();
 
-                if ("[Removed]".equalsIgnoreCase(title) || "[Removed]".equalsIgnoreCase(description)
+                if ("[Removed]".equalsIgnoreCase(title) || "[Removed]".equalsIgnoreCase(short_description)
                         || "[Removed]".equalsIgnoreCase(content) || "[Removed]".equalsIgnoreCase(author)) {
                     continue;
                 }

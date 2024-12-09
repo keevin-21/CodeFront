@@ -1,16 +1,16 @@
-// ProtectedRoot.jsx
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useSession } from "../contexts/SessionContext";
 
 const ProtectedRoute = ({ children }) => {
-    const { session } = useSession();
+    const { currentUser } = useSession();
 
-    if (!session) {
-        return <Navigate to="/login" replace />;
+    if (!currentUser) {
+        // Si no hay usuario en la sesión, redirige al login
+        return <Navigate to="/login" />;
     }
 
-    return children;
+    return children; // Si el usuario está autenticado, muestra el contenido protegido
 };
 
 export default ProtectedRoute;

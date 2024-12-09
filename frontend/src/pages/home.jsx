@@ -4,9 +4,9 @@ import {Navigate} from "react-router-dom";
 import {useSession} from "../contexts/SessionContext";
 
 const Home = () => {
-    const { session } = useSession();
+    const { currentUser } = useSession();
 
-    if (session) {
+    if (currentUser) {
         return <Navigate to="/news" replace />;
     }
     return (

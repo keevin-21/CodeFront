@@ -41,7 +41,7 @@ const Login = () => {
                 setErrorMessage(errorData.message || "Login failed.");
             }
         } catch (error) {
-            setErrorMessage("An error occurred: ${error.message}");
+            setErrorMessage(`An error occurred: ${error.message}`);
         }
     };
 
