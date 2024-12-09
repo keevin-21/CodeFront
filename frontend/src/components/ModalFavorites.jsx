@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import starIcon from "../assets/icons/star-icon.svg";
 import starFillIcon from "../assets/icons/star-fill-icon.svg";
 
 const ModalFavorites = ({ showModal, handleCloseModal, selectedArticle, toggleFavorite, isFavorite }) => {
+    const [localFavorite, setLocalFavorite] = useState(isFavorite);
+
+    const handleToggleFavorite = () => {
+        setLocalFavorite(!localFavorite);
+        toggleFavorite();
+    };
+
+    const handleClose = () => {
+        window.location.reload();  // Reload the page
+        handleCloseModal();  // Close the modal
+    };
+
     return (
         <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
             <Modal.Header closeButton className="custom-modal-header">
-                <Modal.Title className="custom-modal-title">{selectedArticle.title}</Modal.Title>
+                <Modal.Title className="custom-modal-title">{selectedArticle.news.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body className="custom-modal-body">
                 <img
@@ -16,10 +28,6 @@ const ModalFavorites = ({ showModal, handleCloseModal, selectedArticle, toggleFa
                     alt={selectedArticle.news.title}
                     style={{ marginBottom: "20px" }}
                 />
-                <p className="custom-modal-content">
-                    <strong className="custom-modal-text">Description:</strong> {selectedArticle.news.shortDescription || "No description available."}
-                </p>
-                <hr />
                 <p className="custom-modal-content">
                     <strong className="custom-modal-text">Author:</strong> {selectedArticle.news.author || "Unknown author"}
                 </p>
@@ -40,14 +48,14 @@ const ModalFavorites = ({ showModal, handleCloseModal, selectedArticle, toggleFa
             </Modal.Body>
             <Modal.Footer className="custom-modal-footer">
                 <img
-                    src={isFavorite ? starFillIcon : starIcon}
+                    src={localFavorite ? starIcon : starFillIcon}
                     alt="Favorite"
                     className="favorite-icon"
-                    onClick={toggleFavorite}
+                    onClick={handleToggleFavorite}
                     style={{cursor: "pointer"}}
                 />
-                <p className="favorite-text">Favorite</p>
-                <Button variant="secondary" onClick={handleCloseModal} className="custom-btn">
+                <p className="favorite-text">Not favorite</p>
+                <Button variant="secondary" onClick={handleClose} className="custom-btn">
                     Close
                 </Button>
             </Modal.Footer>

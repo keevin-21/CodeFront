@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../components/modalNew.css";
 import { useSession } from "../contexts/SessionContext";
-
-// Rutas de los íconos
 import starIcon from "../assets/icons/star-icon.svg";
 import starFillIcon from "../assets/icons/star-fill-icon.svg";
 
@@ -12,8 +10,7 @@ const ModalNew = ({ show, handleClose, article }) => {
     const { currentUser } = useSession();
 
     const toggleFavorite = async () => {
-        // Verifica si currentUser existe
-        if (!currentUser || !currentUser.userId) {  // Cambia userID por userId
+        if (!currentUser || !currentUser.userId) {
             console.error("User not logged in or userId is undefined.");
             alert("You need to log in to add favorites.");
             return;
@@ -28,7 +25,7 @@ const ModalNew = ({ show, handleClose, article }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userId: currentUser.userId,  // Usa userId en minúsculas
+                    userId: currentUser.userId,
                     title: article.title,
                     shortDescription: article.shortDescription,
                     author: article.author,
@@ -52,7 +49,6 @@ const ModalNew = ({ show, handleClose, article }) => {
     };
 
 
-    // Si currentUser no está disponible, mostrar mensaje o redirigir
     if (!currentUser) {
         return <div>Please log in to manage favorites.</div>;
     }

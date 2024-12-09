@@ -29,12 +29,10 @@ const Favorites = () => {
         setIsFavorite(article.isFavorite); // Inicializa si es favorito
         setShowModal(true);
     };
-
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedArticle(null);
     };
-
     const toggleFavorite = async () => {
         if (!currentUser || !currentUser.userId) {
             alert("You need to log in to add or remove favorites.");
@@ -98,6 +96,7 @@ const Favorites = () => {
             console.error('Error managing favorite:', error); // Log para errores
         }
     };
+
     return (
         <div className="favorites-page">
             <div className="favorites-content">
@@ -127,7 +126,7 @@ const Favorites = () => {
                                 </Col>
                             ))
                         ) : (
-                            <p>No favorites found.</p>
+                            <p className="favorites-notfound">No favorites found.</p>
                         )}
                     </Row>
                 </div>

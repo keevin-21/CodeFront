@@ -62,3 +62,7 @@
 .card-button {
     margin-top: auto;
 }
+
+.favorites-notfound {
+    color: var(--gris);
+}

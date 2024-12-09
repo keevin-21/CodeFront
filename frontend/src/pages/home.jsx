@@ -27,6 +27,33 @@ const Home = () => {
                         Sign Up
                     </button>
                 </div>
+                <h1 className="footer-title">About us</h1>
+                <footer className="home-footer">
+                    <div className="footer-content container">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <h5>Roles</h5>
+                                <ul>
+                                    <li><strong>◆ Frontend/UX:</strong> Teresa Rivas Gomez</li>
+                                    <li><strong>◆ Backend/API:</strong> Andrea Rivas Gomez</li>
+                                    <li><strong>◆ Data Base:</strong> Kevin Alejandro Gonzalez</li>
+                                </ul>
+                            </div>
+                            <div className="col-md-4">
+                                <h5>Subject</h5>
+                                <p>Java Programming Workshop</p>
+                                <p><strong>◆ Teacher:</strong> Sergio Omar Infante Prieto</p>
+                            </div>
+                            <div className="col-md-4">
+                                <h5>Origin</h5>
+                                <p>Universidad Autónoma de Baja California</p>
+                                <p><strong>◆ Location:</strong> Ensenada, B.C. Campus Punta Morro</p>
+                                <p><strong>◆ Career:</strong> Ingeniero en Software y Tecnologías Emergentes</p>
+                                <p><strong>◆ Group:</strong> 5to Semestre Grupo 932</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     );
