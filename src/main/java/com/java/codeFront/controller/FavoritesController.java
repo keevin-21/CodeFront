@@ -93,13 +93,14 @@ public class FavoritesController {
         }
 
         // Buscar el favorito usando userId y newsUrl
-        UserFavorites favorite = userFavoritesRepository.findByUser_UserIDAndNews_NewsID(userId, news.getNewsID()).orElse(null);
+        UserFavorites favorite = userFavoritesRepository.findByUser_UserIDAndNews_NewsID(userId, news.getNewsID());
         if (favorite == null) {
             return ResponseEntity.badRequest().body("Favorite not found.");
         }
 
         // Eliminar el favorito
         userFavoritesRepository.delete(favorite);
+        System.out.println("Favorite removed for userId: " + userId + " and newsId: " + news.getNewsID()); // Log para verificar la eliminación
         return ResponseEntity.ok("Favorite removed successfully!");
     }
 }

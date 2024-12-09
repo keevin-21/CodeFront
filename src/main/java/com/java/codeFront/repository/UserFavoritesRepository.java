@@ -10,8 +10,5 @@ import java.util.List;
 public interface UserFavoritesRepository extends JpaRepository<UserFavorites, Integer> {
     List<UserFavorites> findByUser_UserID(int userID);
     boolean existsByUser_UserIDAndNews_NewsID(int userId, int newsId);
-
-    List<UserFavorites> findByNews_NewsID(int newsId);
-
     UserFavorites findByUser_UserIDAndNews_NewsID(int userId, int newsId);
 }

@@ -46,6 +46,7 @@ const Favorites = () => {
         try {
             if (isAlreadyFavorite) {
                 // Eliminar el favorito
+                console.log('Attempting to remove favorite for userId:', currentUser.userId, 'and newsUrl:', selectedArticle.news.url); // Log para depurar
                 const response = await fetch('http://localhost:8080/favorites/remove', {
                     method: 'DELETE',
                     headers: {
@@ -59,13 +60,14 @@ const Favorites = () => {
 
                 if (response.ok) {
                     setIsFavorite(false);  // Actualizar el estado para reflejar que ya no es un favorito
-                    console.log('Favorite removed!');
+                    console.log('Favorite removed successfully!'); // Log para confirmar
                 } else {
                     const error = await response.text();
-                    console.error('Error:', error);
+                    console.error('Error removing favorite:', error); // Log para errores
                 }
             } else {
                 // Agregar el favorito
+                console.log('Adding favorite for userId:', currentUser.userId, 'and newsUrl:', selectedArticle.news.url); // Log para depurar
                 const response = await fetch('http://localhost:8080/favorites/add', {
                     method: 'POST',
                     headers: {
@@ -86,14 +88,14 @@ const Favorites = () => {
 
                 if (response.ok) {
                     setIsFavorite(true);  // Actualizar el estado para reflejar que ahora es un favorito
-                    console.log('Favorite added!');
+                    console.log('Favorite added!'); // Log para confirmar
                 } else {
                     const error = await response.text();
-                    console.error('Error:', error);
+                    console.error('Error adding favorite:', error); // Log para errores
                 }
             }
         } catch (error) {
-            console.error('Error managing favorite:', error);
+            console.error('Error managing favorite:', error); // Log para errores
         }
     };
     return (
